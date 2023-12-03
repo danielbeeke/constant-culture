@@ -6,7 +6,10 @@ import { GeoJSON2SVG } from 'geojson2svg'
 import Bbox from '@turf/bbox'
 import { MapWithExtras } from '.'
 
-export const exportContourToSVGPaths = (map: MapWithExtras) => {
+export const exportContourToSVGPaths = (
+  map: MapWithExtras,
+  transform: ([x, y]: [number, number]) => [number, number],
+) => {
   const features = map.querySourceFeatures('contourSourceFeet', {
     sourceLayer: 'contours',
   })
@@ -20,6 +23,8 @@ export const exportContourToSVGPaths = (map: MapWithExtras) => {
   }
 
   const converter = new GeoJSON2SVG({
+    viewportSize: { width: 1200, height: 900 },
+    coordinateConverter: transform,
     output: 'path',
   })
 

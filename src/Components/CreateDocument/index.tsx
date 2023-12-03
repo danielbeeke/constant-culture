@@ -1,6 +1,6 @@
 import MapElement from './Map'
 import { useState } from 'react'
-import { createSvgBlobUrl } from './createSvgBlobUrl'
+import { createSvg } from './createSvg'
 import Draw from './Draw'
 import Geocoder from './Geocoder'
 import Contour from './Contour'
@@ -11,7 +11,7 @@ import MapboxDraw from '@mapbox/mapbox-gl-draw'
 export type MapWithExtras = Map & { draw?: MapboxDraw }
 
 export default function CreateDocument() {
-  const [blobUrl, setBlobUrl] = useState('')
+  const [svg, setSvg] = useState('')
 
   return (
     <div className="create-document">
@@ -19,13 +19,16 @@ export default function CreateDocument() {
         {(map) => (
           <>
             <Contour map={map} />
-            <Draw map={map} onCreate={() => setBlobUrl(createSvgBlobUrl(map))} />
+            <Draw map={map} onCreate={() => setSvg(createSvg(map))} />
             <Geocoder map={map} />
           </>
         )}
       </MapElement>
 
-      <iframe src={blobUrl} style={{ width: '50vw', height: '100vh' }} />
+      <div
+        style={{ width: '50vw', height: '100vh' }}
+        dangerouslySetInnerHTML={{ __html: svg }}
+      ></div>
     </div>
   )
 }

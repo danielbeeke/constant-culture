@@ -4,7 +4,10 @@ import bboxClip from '@turf/bbox-clip'
 import { GeoJSON2SVG } from 'geojson2svg'
 import { MapWithExtras } from '.'
 
-export const exportBaseShapeToSVGPaths = (map: MapWithExtras) => {
+export const exportBaseShapeToSVGPaths = (
+  map: MapWithExtras,
+  transform: ([x, y]: [number, number]) => [number, number],
+) => {
   const baseShape = map.draw!.getAll()
   const bounds = map.getBounds()
 
@@ -14,6 +17,8 @@ export const exportBaseShapeToSVGPaths = (map: MapWithExtras) => {
   }
 
   const converter = new GeoJSON2SVG({
+    viewportSize: { width: 1200, height: 900 },
+    coordinateConverter: transform,
     output: 'path',
   })
 
