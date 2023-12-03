@@ -7,4 +7,7 @@ export default defineConfig({
   define: {
     __MAPTILER__: `"${process.env.MAPTILER}"`,
   },
+  build: {
+    outDir: 'docs',
+  },
 })
