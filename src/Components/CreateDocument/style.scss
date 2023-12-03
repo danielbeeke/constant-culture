@@ -1,7 +1,13 @@
-.create-document-map {
-  height: 80vh;
-}
-
 .maplibregl-control-container button {
   pointer-events: all;
+}
+
+.create-document {
+  display: flex;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
 }
