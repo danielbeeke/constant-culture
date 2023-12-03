@@ -10,10 +10,6 @@ export default function Geocoder({ map }: { map: Map }) {
       limit: 1,
     })
     map.addControl(geocoder)
-
-    map.on('load', () => {
-      geocoder.setQuery('Grunnergasse 2 Stockerau 2000, Austria')
-    })
   })
 
   return null

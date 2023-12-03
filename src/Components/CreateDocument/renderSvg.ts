@@ -1,20 +1,30 @@
+import { FeatureCollection, Polygon, GeoJsonProperties } from 'geojson'
+
 export const renderSvg = ({
   contourPaths,
-  viewBox,
+  width,
+  height,
   baseShapePaths,
+  baseShape,
 }: {
+  width: number
+  height: number
   contourPaths: string[]
-  viewBox: { left: number; top: number; right: number; bottom: number }
   baseShapePaths: string[]
+  baseShape: FeatureCollection<Polygon, GeoJsonProperties>
 }) => {
-  const { left, top, right, bottom } = viewBox
+  const shapes = JSON.stringify(baseShape.features).replaceAll('"', "'")
 
   const svg = `
     <svg 
-      viewBox="${left} ${top} ${right} ${bottom}"
+      viewBox="0 0 ${width} ${height}"
       xmlns="http://www.w3.org/2000/svg">
+      <g id="base" data-shapes="${shapes}">
       ${baseShapePaths.join('\n')}
+      </g>
+      <g id="contour">
       ${contourPaths.join('\n')}
+      </g>
     </svg>
   `
 

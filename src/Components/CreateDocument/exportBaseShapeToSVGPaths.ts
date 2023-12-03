@@ -7,6 +7,9 @@ import { MapWithExtras } from '.'
 export const exportBaseShapeToSVGPaths = (
   map: MapWithExtras,
   transform: ([x, y]: [number, number]) => [number, number],
+  width: number,
+  height: number,
+  viewBox: { left: number; top: number; right: number; bottom: number },
 ) => {
   const baseShape = map.draw!.getAll()
   const bounds = map.getBounds()
@@ -17,7 +20,8 @@ export const exportBaseShapeToSVGPaths = (
   }
 
   const converter = new GeoJSON2SVG({
-    viewportSize: { width: 1200, height: 900 },
+    mapExtent: viewBox,
+    viewportSize: { width, height },
     coordinateConverter: transform,
     output: 'path',
   })

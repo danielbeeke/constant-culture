@@ -9,6 +9,9 @@ import { MapWithExtras } from '.'
 export const exportContourToSVGPaths = (
   map: MapWithExtras,
   transform: ([x, y]: [number, number]) => [number, number],
+  width: number,
+  height: number,
+  viewBox: { left: number; top: number; right: number; bottom: number },
 ) => {
   const features = map.querySourceFeatures('contourSourceFeet', {
     sourceLayer: 'contours',
@@ -23,7 +26,8 @@ export const exportContourToSVGPaths = (
   }
 
   const converter = new GeoJSON2SVG({
-    viewportSize: { width: 1200, height: 900 },
+    mapExtent: viewBox,
+    viewportSize: { width, height },
     coordinateConverter: transform,
     output: 'path',
   })
