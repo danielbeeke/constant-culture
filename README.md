@@ -1,30 +1,10 @@
-# React + TypeScript + Vite
+# Proof of concept for the SVG saving / loading
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Demo: http://permacultr-svg.danielbeeke.nl/
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Use the search field to go to a location. Make sure to zoom in till you see contour lines.
+- Use the square icon to start drawing a polygon.
+- After creating a polygon the right side of the screen should show the contour lines and the base shape that you have drawn.
+- You can now save the 'SVG'
+- Reload the page and click on load, select the previously saved SVG.
+- This flow can be better if you use Chrome, but the prototype does not focus on it. It can be better because Chrome keeps a reference to the file that is on the disk.
