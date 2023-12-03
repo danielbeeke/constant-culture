@@ -22,6 +22,7 @@ export const exportBaseShapeToSVGPaths = (
   const converter = new GeoJSON2SVG({
     mapExtent: viewBox,
     viewportSize: { width, height },
+    /** @ts-expect-error wrong types */
     coordinateConverter: transform,
     output: 'path',
   })
